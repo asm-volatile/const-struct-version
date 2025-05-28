@@ -78,7 +78,7 @@ pub fn derive_struct_version(input: TokenStream) -> TokenStream {
             fn version_cached() -> &'static str {
                 extern crate const_struct_version as _const_struct_version;
                 static VERSION: ::std::sync::OnceLock<String> = ::std::sync::OnceLock::new();
-                VERSION.get_or_init(|| Self::version())
+                VERSION.get_or_init(|| version())
             }
         };
     };
