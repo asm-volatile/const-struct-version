@@ -56,7 +56,9 @@ impl_struct_version!(
     f64,
     String,
     std::time::Duration,
-    std::time::Instant
+    std::time::Instant,
+    core::net::Ipv4Addr,
+    core::net::Ipv6Addr
 );
 
 #[cfg_attr(test, mutants::skip)]
