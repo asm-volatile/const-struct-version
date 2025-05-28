@@ -19,6 +19,9 @@ pub mod __private {
 
 pub trait StructVersion {
     fn version() -> String;
+    fn version_cached() -> &'static str {
+        ""
+    }
 }
 
 #[cfg(feature = "derive")]

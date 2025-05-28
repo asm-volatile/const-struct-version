@@ -21,6 +21,7 @@ uuid = { workspace = true, optional = true }
 chrono = { workspace = true, optional = true }
 url = { workspace = true, optional = true }
 sha1 = { workspace = true }
+sha2-const = "0.1.2"
 
 [features]
 default = ["derive", "serde-attributes"]
