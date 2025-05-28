@@ -14,7 +14,6 @@ use syn::{
 pub fn derive_struct_version(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let ident = &input.ident;
-    let vis = &input.vis;
 
     // Process item-level attributes and generate hash update code based on type
     let (item_attrs, item_code) = match &input.data {
@@ -76,10 +75,10 @@ pub fn derive_struct_version(input: TokenStream) -> TokenStream {
                 }
             }
 
-            #vis fn version_cached() -> &'static str {
+            fn version_cached() -> &'static str {
                 extern crate const_struct_version as _const_struct_version;
                 static VERSION: ::std::sync::OnceLock<String> = ::std::sync::OnceLock::new();
-                VERSION.get_or_init(|| <Self as _const_struct_version::StructVersion>::version())
+                VERSION.get_or_init(|| Self::version())
             }
         };
     };
