@@ -81,6 +81,15 @@ impl<T: StructVersion> StructVersion for Option<T> {
         format!("{:x}", hasher.finalize())
     }
 }
+impl<T: StructVersion, E: StructVersion> StructVersion for Result<T, E> {
+    fn version() -> String {
+        let mut hasher = sha1::Sha1::new();
+        hasher.update("Result");
+        hasher.update(type_name::<T>());
+        hasher.update(type_name::<E>());
+        format!("{:x}", hasher.finalize())
+    }
+}
 impl<T: StructVersion> StructVersion for Box<T> {
     fn version() -> String {
         let mut hasher = sha1::Sha1::new();
