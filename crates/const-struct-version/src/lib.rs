@@ -73,6 +73,15 @@ impl<T: StructVersion> StructVersion for Vec<T> {
         format!("{:x}", hasher.finalize())
     }
 }
+impl<T: StructVersion, const N: usize> StructVersion for [T; N] {
+    fn version() -> String {
+        let mut hasher = sha1::Sha1::new();
+        hasher.update("Array");
+        hasher.update(type_name::<T>());
+        hasher.update(N.to_le_bytes());
+        format!("{:x}", hasher.finalize())
+    }
+}
 impl<T: StructVersion> StructVersion for Option<T> {
     fn version() -> String {
         let mut hasher = sha1::Sha1::new();
