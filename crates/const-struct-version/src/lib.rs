@@ -124,6 +124,14 @@ impl<T: StructVersion> StructVersion for std::sync::Arc<T> {
     }
 }
 
+impl StructVersion for serde_json::Number {
+    fn version() -> String {
+        let mut hasher = sha1::Sha1::new();
+        hasher.update("serde_json::Number");
+        format!("{:x}", hasher.finalize())
+    }
+}
+
 impl StructVersion for serde_json::Value {
     fn version() -> String {
         let mut hasher = sha1::Sha1::new();
